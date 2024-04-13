@@ -1,8 +1,10 @@
+import re
 import requests
+from django.conf import settings
 
 def get_refresh_token(refresh_token):
     
-    refresh_url = 'http://127.0.0.1:8000/user/token/refresh'
+    refresh_url = settings.REFRESH_URL
     
     data={
         'refresh_token': refresh_token
@@ -17,3 +19,9 @@ def get_refresh_token(refresh_token):
     else:
         # Token refresh failed, return None
         return None
+    
+def is_valid_email(email):
+    # Define the regex pattern for email validation
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    # Use re.match to check if the email matches the pattern
+    return re.match(pattern, email) is not None

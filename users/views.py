@@ -6,6 +6,7 @@ from users.models import CustomUser
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django.db.models import Q
+from users.utils import is_valid_email
 
 
 # Create your views here.
@@ -17,6 +18,10 @@ class RegisterUserAPIView(generics.CreateAPIView):
     def create(self, request, *args, **kwargs):
         email = request.data.get('email')
         username = request.data.get('username')
+        
+        if not is_valid_email(email):
+            return Response({'error': 'Invalid email format'}, status=status.HTTP_400_BAD_REQUEST)
+        
         if CustomUser.objects.filter(email=email).exists():
             return Response({'error': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
         if CustomUser.objects.filter(username=username).exists():
