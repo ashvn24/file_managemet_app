@@ -39,6 +39,13 @@ class LoginAPIView(generics.CreateAPIView):
         serializer.is_valid(raise_exception = True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+    
+class UpdateUSer(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserProfileSerializer
+    queryset = UserProfile.objects.all()
+    lookup_field = 'pk'
+    
 
 class GroupCreateAPIView(generics.ListCreateAPIView):
     queryset = Groups.objects.all()
@@ -189,6 +196,9 @@ class FolderDataAPIView(generics.ListAPIView):
             folder_data['files'] = file_serializer.data
             data.append(folder_data)
         return data
+    
+
+
     
 class listusers(generics.ListAPIView):
     queryset = CustomUser.objects.all()

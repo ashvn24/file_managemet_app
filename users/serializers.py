@@ -45,6 +45,10 @@ class LoginSerializer(serializers.ModelSerializer):
             'refresh_token':str(user_token.get('refresh'))
         }
 
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ['full_name', 'phone_number', 'address']
 class GroupSerializer(serializers.ModelSerializer):
     
     class Meta:
