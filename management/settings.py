@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 from datetime import timedelta
-from dotenv import load_dotenv
 
-load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,7 +29,7 @@ SECRET_KEY = 'django-insecure-p=64as(sd8r&tbxrob=-ud+yi_1kbffw!8usrpcpkjwg7xbdt1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -146,4 +144,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # from dotenv file
-REFRESH_URL = os.getenv('SERVER') + '/user/token/refresh'
+REFRESH_URL = 'http://127.0.0.1:8000/user/token/refresh'
